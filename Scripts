@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
 }
 
-
+WIN SCRIPT
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -76,5 +76,17 @@ public class WinScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D Collision)
     {
         SceneManager.LoadScene(1); // I did the same thing i did in lose but for this one and win screen
+    }
+}
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Lose : MonoBehaviour
+{
+    //This was a very fun one to make
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        SceneManager.LoadScene(0); //Krish helped me a lot thank you krish
     }
 }

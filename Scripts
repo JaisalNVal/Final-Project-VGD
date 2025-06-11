@@ -1,0 +1,80 @@
+using UnityEngine;
+
+public class RotationScript : MonoBehaviour
+{
+    // Using this link https://docs.unity3d.com/ScriptReference/Transform.Rotate.html I found a way to rotate the gameobject online
+    void Update()
+    {
+        transform.Rotate(0, 0, -90 * Time.deltaTime); //Rotates the object when time is going n
+    }
+}
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+//this is your script but I used this tutorial https://docs.unity3d.com/ScriptReference/AudioSource.PlayOneShot.html to make the jumping noise!
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 5f;
+    public float jumpSpeed = 8f;
+    private float direction = 0f;
+    private Rigidbody2D player;
+
+    public AudioClip jumpSound;        // sound for jump
+    private AudioSource audioSource;   // plays sounds
+
+    void Start()
+    {
+        player = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>(); // get the audio player
+    }
+
+    void Update()
+    {
+        direction = Input.GetAxis("Horizontal");
+
+        if (direction != 0f)
+        {
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+        }
+        else
+        {
+            player.velocity = new Vector2(0, player.velocity.y);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+
+            if (jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound); // play jump sound here
+            }
+        }
+    }
+}
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+public class WinScript : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    
+    void OnCollisionEnter2D(Collision2D Collision)
+    {
+        SceneManager.LoadScene(1); // I did the same thing i did in lose but for this one and win screen
+    }
+}
